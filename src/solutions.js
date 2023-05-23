@@ -248,17 +248,11 @@ function parseDateString(value) {
 
     const [ year, day, month ] = value.split("-");
 
-    // if (year.length != 4) throw new Error ("Error");
-    // else if (month.length != 2) throw new Error ("Error");
-    // else if (day.length != 2) throw new Error ("Error");
-
     let date = new Date();
 
     date.setFullYear(year);
     date.setMonth(month - 1);
     date.setDate(day);
-
-    console.log(date);
 
     return date;
 
@@ -287,7 +281,9 @@ function parseDateString(value) {
  ******************************************************************************/
 
 function toDateString(value) {
-  // Replace this comment with your code...
+  
+    return `${value.getFullYear()}` + "-" + `${value.getDate()}`.padStart(2, "0") + "-" + `${value.getMonth() + 1}`.padStart(2, "0");
+
 }
 
 /*******************************************************************************
@@ -598,19 +594,13 @@ function generateLicenseLink(licenseCode) {
 function pureBool(value) {
   
     if (!value || value <= 0 || value === false) return false;
+    if (value === 1 || value === true) return true;
+    if (typeof value === "string") {
 
-    else {
+        value = value.toLowerCase();
 
-        if (value === 1 || value === true) return true;
-        
-        if (typeof value === "string") {
-
-            value = value.toLowerCase();
-
-            if (value === "y" || value === "t" || value === "yes" || value === "true") return true;
-            else return false;
-
-        }
+        if (value === "y" || value === "t" || value === "yes" || value === "true") return true;
+        else return false;
 
     }
 
